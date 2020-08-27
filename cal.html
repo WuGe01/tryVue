@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ mm }}
+        {{ me }}
+        <span v-if="seen">我是傳奇</span>
+        <ol>
+            <li v-for="todo in todos">
+              {{ todo.text }}
+            </li>
+        </ol>
+        <button v-on:click="reverseMessage">Reverse Message</button>
+
+        <div id="in">
+            <input type="text" name="name"  v-model="name">
+            {{name}}
+        </div>
+        <ol>
+            <!-- Create an instance of the todo-item component -->
+            <todo-item 
+            v-for="item in todos"
+            v-bind:xxx="item"
+            v-bind:key="item.id"
+             >
+            </todo-item>
+          </ol>
+        <ol>
+            <input type="text" name="name"  v-model="things" @change="addgoods">
+            <todo-goods
+            v-for="item in goods"
+            v-bind:xxx="item"
+            v-bind:date="item.date"
+             >
+            </todo-goods>
+          </ol>
+
+      </div>
+
+
+</body>
+</html>
+<script>
+Vue.component('todo-item', {
+    props: ['xxx'],
+  template: '<li>{{xxx.id}}{{xxx.text}}</li>'
+})
+Vue.component('todo-goods', {
+    props: ['xxx','date'],
+  template: '<li>{{date}}{{xxx.text}}</li>'
+})
+var app = new Vue({
+  el: '#app',
+  data: {
+    things:"",
+    mm: '我是天才王!',
+    me: '大魔王',
+    name: '巫妖王',
+    seen:true,
+    todos:[
+        {id:0,text: '香蕉王' },
+        {id:1,text: '蘋果王' },
+        {id:2,text: '起司王' }
+    ],
+    goods:[
+        {date:"2020-08-17",text: '香蕉王' },
+        {date:"2020-08-18",text: '蘋果王' },
+        {date:"2020-08-19",text: '起司王' }
+    ]
+  },
+  methods:{
+    reverseMessage: function () {
+      this.mm = this.mm.split('').reverse().join('')
+    },
+    addgoods: function() {
+        this.goods.push({date:"2020-08-27",text:this.things})
+    }
+  }
+})
+
+
+
+</script>
