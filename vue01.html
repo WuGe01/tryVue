@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuem元件</title>
+</head>
+<body>
+    <div id="app">
+        <counter> </counter>
+        <counter> </counter>
+        <counter> </counter>
+        <post v-for="(post,index) in posts" :title='post.title' :de~="post.de"></post>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type='text/x-template' id='counter'>
+        <button @click='ckk++'>{{ ckk }}</button>
+    </script>
+    <script type='text/x-template' id='post'>
+      <div>
+          <h1>{{title}}</h1>
+          <p>{{de}}</p>
+      </div>
+    </script>
+    <script>
+        Vue.component('counter',{
+            template: '#counter',
+            data(){
+                return{
+                    ckk: 0
+                }
+            }
+        })
+        Vue.component('post',{
+            template: '#post',
+            props:{
+                title:String,
+                de:String
+            }
+        }
+        )
+        new Vue({
+            el:'#app',
+            data(){
+                return{
+                  posts:[
+                    {title:'aaa', de:'aaaaaaa'},
+                    {title:'bbb', de:'bbbbbbb'},
+                    {title:'ccc', de:'ccccccc'} 
+                  ]
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

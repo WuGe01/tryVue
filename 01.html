@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    .red{
+        border:1px solid red;
+    }
+    .blue{
+        border:1px solid blue;
+    }
+    .black{
+        border:1px solid black;
+    }
+
+</style>
+</head>
+<body>
+    <div id="app">
+        <input type="text" name="" v-model="textc" :style="{border: '10px solid ' + BColor}">
+        <input type="button" value="新增" @click='add'>
+        <ul v-for="(item,idx) in items">
+            <li>{{item.text}}</li>
+        </ul>
+
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+new Vue({
+    el:'#app',
+    data: {
+     textc:'',
+     items:[]
+
+    },
+    methods:{
+        add(){
+            if(this.textc.length >= 3){
+                console.log(123)
+                this.items.push({text:this.textc})
+                this.textc=''
+            }else{
+                console.log(321)
+            }
+        }
+    },
+    computed:{
+        BColor(){
+            const len=this.textc.length
+            return len == 0 ? 'black' : len < 3 ? 'red' : 'green'
+
+        }
+    }
+})
+</script>
+    
+</body>
+</html>
